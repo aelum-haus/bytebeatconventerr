@@ -1,0 +1,95 @@
+<html><head><base href="." />
+<meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+<link rel="stylesheet" href="./styles/base.css">
+<link rel="stylesheet" href="./styles/components.css">
+<link rel="stylesheet" href="./styles/animations.css">
+<script type="module" src="./src/main.js"></script>
+<title>Audio to Bytebeat Converter</title>
+</head>
+<body>
+
+<h1>Audio to Bytebeat Converter</h1>
+<p class="note">Note: Play converted bytebeat in floatbeat. Default volume is 100%</p>
+
+<div class="drop-zone" id="dropZone">
+    <div class="drop-inner">
+      <div class="upload-icon" aria-hidden="true">⬆️</div>
+      <div class="drop-text">
+        <div class="drop-title">Drop audio file here or click to select</div>
+        <div class="drop-sub">Supported: .wav, .mp3 — or drag & drop</div>
+      </div>
+      <div class="upload-spinner" id="dropSpinner" aria-hidden="true" style="display:none;">
+        <svg width="40" height="40" viewBox="0 0 50 50">
+          <circle cx="25" cy="25" r="20" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none" stroke-opacity="0.15"/>
+          <path d="M45 25a20 20 0 0 1-20 20" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+    <input type="file" id="audioFile" accept="audio/*" style="display: none;">
+</div>
+
+<div>
+    <button id="convertToSampleData">Convert to Sample Data</button>
+    <button id="convertToBytebeat">Convert to Bytebeat</button>
+    <button id="downloadBytebeat">Download Converted Bytebeat</button>
+    <button id="copyBytebeat">Copy Bytebeat Code</button>
+</div>
+
+<div class="checkbox-wrapper">
+    <input type="checkbox" id="enableFloat" checked>
+    <label for="enableFloat">Enable Floatbeat Mode</label>
+</div>
+
+<div class="danger-zone">
+    <h3>⚠️ DANGER ZONE ⚠️</h3>
+    <p>Disabling Floatbeat Mode will switch to Bytebeat mode (0-255 values)</p>
+    <p>Warning: This may cause extremely loud audio due to value range limitations!</p>
+    <div id="dangerText" class="danger-text">⚠️ BYTEBEAT MODE ACTIVE - USE WITH CAUTION ⚠️</div>
+</div>
+
+<div class="checkbox-wrapper">
+    <input type="checkbox" id="enableVolume" checked>
+    <label for="enableVolume">Enable Volume Control</label>
+</div>
+
+<div class="format-select mode-select">
+    <label>
+        <input type="radio" name="format" value="default" checked> Default Format
+    </label>
+    <label>
+        <input type="radio" name="format" value="alternate"> Alternate (t||)
+    </label>
+    <label>
+        <input type="radio" name="format" value="assignment"> Assignment Format
+    </label>
+</div>
+
+<div id="volumeControl">
+    Volume: <input type="number" id="volume" min="0" max="100" value="100">%
+</div>
+
+<div id="volumeDivider">
+    Divide Volume by: <input type="number" id="volumeDividerValue" min="1" value="1" style="margin-left: 10px;">
+    <button id="divideVolumeBtn">Divide Volume</button>
+    <button id="undoDivideVolumeBtn">Undo Volume Division</button>
+</div>
+
+<div id="sampleRate">
+    Sample Rate: <span id="currentRate">44100</span> Hz
+    <input type="number" id="customSampleRate" min="1" max="192000" value="44100" style="margin-left: 10px;">
+    <button id="setCustomSampleRateBtn">Set Custom Sample Rate</button>
+    <input type="number" id="sampleRateDivider" min="1" max="100" value="1" style="margin-left: 10px;">
+    <button id="divideSampleRateBtn">Divide Sample Rate</button>
+    <button id="undoDivideSampleRateBtn">Undo Sample Rate Division</button>
+</div>
+
+<div>
+    <textarea id="output" readonly></textarea>
+</div>
+
+<!-- Toast container -->
+<div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+</body>
+</html>

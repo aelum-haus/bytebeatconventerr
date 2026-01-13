@@ -1,0 +1,44 @@
+@keyframes glow-pulse {
+  0% { box-shadow: 0 0 6px rgba(var(--glow-color),0.02), 0 0 0 rgba(var(--glow-color),0); transform: scale(1); }
+  40% { box-shadow: 0 0 22px rgba(var(--glow-color),0.06), 0 0 48px rgba(var(--glow-color),0.03); transform: scale(1.01); }
+  100% { box-shadow: 0 0 6px rgba(var(--glow-color),0.02), 0 0 0 rgba(var(--glow-color),0); transform: scale(1); }
+}
+
+@keyframes pulse-soft {
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  70% { box-shadow: 0 8px 30px -12px rgba(255,255,255,0.04); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { transform: translateY(-6px); opacity: 1; }
+  100% { transform: translateY(-2px); opacity: 1; }
+}
+
+@keyframes toast-slide {
+  0% { transform: translateY(-12px) scale(.98); opacity: 0; filter: blur(2px); }
+  100% { transform: translateY(0) scale(1); opacity: 1; filter: none; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.page-shimmer {
+  background-image: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.03) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear both;
+}
+
+.upload-spinner { display: inline-grid; place-items: center; color: #e5e7eb; }
+.upload-spinner svg { transform-origin: center; animation: spin 700ms linear infinite; filter: drop-shadow(0 8px 22px rgba(255,255,255,0.03)); }
+@keyframes spin { 0% { transform: rotate(0deg) } 100% { transform: rotate(360deg) } }
+
+@keyframes flash-complete {
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  50% { box-shadow: 0 10px 30px rgba(255,255,255,0.03); transform: translateY(-4px); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); transform: translateY(0); }
+}
+
